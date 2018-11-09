@@ -1,0 +1,15 @@
+# artifacts
+/coverage
+/dist
+
+# dependencies
+/node_modules
+
+# lock files
+package-lock.json
+
+# misc
+.DS_Store
+.env
+.idea
+npm-debug.log
