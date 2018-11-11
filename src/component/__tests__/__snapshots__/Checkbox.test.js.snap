@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Checkbox renders correctly 1`] = `
+Array [
+  <input
+    checked={true}
+    onChange={[Function]}
+    type="checkbox"
+    value="b"
+  />,
+  <input
+    checked={false}
+    onChange={[Function]}
+    type="checkbox"
+    value="c"
+  />,
+  <input
+    checked={false}
+    onChange={[Function]}
+    type="checkbox"
+    value="d"
+  />,
+]
+`;

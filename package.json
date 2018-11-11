@@ -1,0 +1,40 @@
+{
+  "name": "normal-forme",
+  "version": "0.1.0",
+  "license": "MIT",
+  "description": "Elegant form components for React",
+  "author": "Jimmy Sanford <jimbo@users.noreply.github.com>",
+  "main": "dist/normal-forme.cjs.js",
+  "module": "dist/normal-forme.esm.js",
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rollup --config",
+    "build:dev": "rollup --config --watch",
+    "format": "prettier --write 'src/**/*.js'",
+    "format:config": "prettier --write '*.config.js'",
+    "test": "jest",
+    "test:dev": "jest --coverage --verbose"
+  },
+  "peerDependencies": {
+    "react": "16.7.0-alpha.0",
+    "react-dom": "16.7.0-alpha.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.5",
+    "@babel/plugin-syntax-jsx": "^7.0.0",
+    "@babel/plugin-transform-react-jsx": "^7.0.0",
+    "@babel/preset-env": "^7.1.5",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
+    "jest": "^23.6.0",
+    "prettier": "^1.15.1",
+    "react": "16.7.0-alpha.0",
+    "react-dom": "16.7.0-alpha.0",
+    "react-test-renderer": "16.7.0-alpha.0",
+    "rollup": "^0.67.0",
+    "rollup-plugin-babel": "^4.0.3"
+  }
+}

@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Select multiple={false} renders correctly 1`] = `
+<select
+  onChange={[Function]}
+  value=""
+/>
+`;
+
+exports[`Select multiple={true} renders correctly 1`] = `
+<select
+  multiple={true}
+  onChange={[Function]}
+  value={Array []}
+/>
+`;
