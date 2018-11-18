@@ -2,7 +2,8 @@ import { createElement, useCallback } from "react"
 
 import { useFormContext } from "../context/form"
 
-const TextArea = ({ field }) => {
+const TextArea = props => {
+  const { field, ...restProps } = props
   const { setValue, value } = useFormContext(field)
   const stringValue = value == null ? "" : `${value}`
 
@@ -13,7 +14,7 @@ const TextArea = ({ field }) => {
     [setValue]
   )
 
-  return <textarea value={stringValue} onChange={handleChange} />
+  return <textarea {...restProps} value={stringValue} onChange={handleChange} />
 }
 
 export default TextArea

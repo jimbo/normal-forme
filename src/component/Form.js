@@ -10,7 +10,8 @@ export const useDefaultProps = withDefaultProps({
 })
 
 const Form = props => {
-  const { children, onSubmit, preventDefault } = useDefaultProps(props)
+  const allProps = useDefaultProps(props)
+  const { children, onSubmit, preventDefault, ...restProps } = allProps
   const store = useFormState()
   const { valueMap } = store[0]
 
@@ -24,7 +25,7 @@ const Form = props => {
   )
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form {...restProps} onSubmit={handleSubmit}>
       <FormProvider value={store}>{children}</FormProvider>
     </form>
   )
