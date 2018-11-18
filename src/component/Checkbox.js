@@ -2,7 +2,8 @@ import { createElement, useCallback } from "react"
 
 import { useFormContext } from "../context/form"
 
-const Checkbox = ({ field, value }) => {
+const Checkbox = props => {
+  const { field, value, ...restProps } = props
   const { transformValue, value: selectedValues } = useFormContext(field)
   const valueSet = selectedValues || new Set()
   const checked = valueSet.has(value)
@@ -25,6 +26,7 @@ const Checkbox = ({ field, value }) => {
 
   return (
     <input
+      {...restProps}
       type="checkbox"
       checked={checked}
       value={value}

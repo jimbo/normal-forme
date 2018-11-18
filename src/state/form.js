@@ -2,11 +2,12 @@ import { useReducer } from "react"
 
 import { getDeepValue, setDeepValue } from "../util/deep"
 
-const getInitialState = (initialValueMap = new Map()) => ({
-  valueMap: initialValueMap,
-})
+const initialValueMap = new Map()
+const initialState = { valueMap: initialValueMap }
 
-export const reducer = (state = getInitialState(), { payload, type } = {}) => {
+export const reducer = (state = initialState, action = {}) => {
+  const { payload, type } = action
+
   switch (type) {
     case "set value": {
       const { valueMap } = state
@@ -24,11 +25,22 @@ export const reducer = (state = getInitialState(), { payload, type } = {}) => {
 
       return { valueMap: nextValueMap }
     }
+    case "initialize values": {
+      const { valueMap } = payload
+
+      return { valueMap }
+    }
     default: {
       return state
     }
   }
 }
 
-export const useFormState = initialValueMap =>
-  useReducer(reducer, getInitialState(initialValueMap))
+export const useFormState = (valueMap = initialValueMap) => {
+  const initialAction = {
+    type: "initialize values",
+    payload: { valueMap },
+  }
+
+  return useReducer(reducer, initialState, initialAction)
+}

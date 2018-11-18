@@ -2,7 +2,8 @@ import { createElement, useCallback } from "react"
 
 import { useFormContext } from "../context/form"
 
-const Radio = ({ field, value }) => {
+const Radio = props => {
+  const { field, value, ...restProps } = props
   const { setValue, value: selectedValue } = useFormContext(field)
   const checked = value === selectedValue
 
@@ -15,6 +16,7 @@ const Radio = ({ field, value }) => {
 
   return (
     <input
+      {...restProps}
       type="radio"
       checked={checked}
       value={value}
