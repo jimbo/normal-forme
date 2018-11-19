@@ -1,7 +1,7 @@
 import { createElement, useCallback } from "react"
 
 import { useFormContext } from "../context/form"
-import createSet from "../util/createSet"
+import { createSet } from "../util/structures"
 
 const pluckValue = ({ value }) => value
 
