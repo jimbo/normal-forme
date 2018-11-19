@@ -8,9 +8,10 @@ const Scope = props => {
   const { setValue, value } = useFormContext(field)
   const store = useFormState(value)
   const { valueMap } = store[0]
+  const empty = !valueMap.size
 
   useEffect(() => {
-    if (!Object.is(value, valueMap)) setValue(valueMap)
+    if (!empty && !Object.is(value, valueMap)) setValue(valueMap)
   })
 
   return <FormProvider value={store}>{children}</FormProvider>
