@@ -1,32 +1,25 @@
 import { createElement, useCallback } from "react"
 
-import { useFormContext } from "../context/form"
-import { createSet } from "../util/structures"
-
-const pluckValue = ({ value }) => value
+import useSingleSelection from "../selection/single"
 
 const Select = props => {
-  const { field, multiple, ...restProps } = props
-  const { setValue, value: selectedValues } = useFormContext(field)
-  const valueArray = Array.from(selectedValues || "")
-  const value = multiple ? valueArray : valueArray.shift() || ""
+  const { field, ...restProps } = props
+  const { selectValue, selectedValue } = useSingleSelection(field)
+  const value = selectedValue || ""
 
   const handleChange = useCallback(
     event => {
-      const { selectedOptions } = event.target
-      const nextValueSet = createSet(selectedOptions, pluckValue)
-
-      setValue(nextValueSet)
+      selectValue(event.target.value)
     },
-    [setValue]
+    [selectValue]
   )
 
   return (
     <select
       {...restProps}
-      multiple={multiple}
-      value={value}
+      multiple={null}
       onChange={handleChange}
+      value={value}
     />
   )
 }

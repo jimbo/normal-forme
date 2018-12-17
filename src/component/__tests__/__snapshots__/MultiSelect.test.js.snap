@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MultiSelect renders correctly 1`] = `
+<select
+  multiple={true}
+  onChange={[Function]}
+  value={Array []}
+/>
+`;
