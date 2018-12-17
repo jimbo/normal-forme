@@ -1,26 +1,25 @@
 import { createElement, useCallback } from "react"
 
-import { useFormContext } from "../context/form"
+import useSingleSelection from "../selection/single"
 
 const Radio = props => {
   const { field, value, ...restProps } = props
-  const { setValue, value: selectedValue } = useFormContext(field)
-  const checked = value === selectedValue
+  const { selectValue, selected } = useSingleSelection(field, value)
 
   const handleChange = useCallback(
     event => {
-      setValue(event.target.value)
+      selectValue(event.target.value)
     },
-    [setValue]
+    [selectValue]
   )
 
   return (
     <input
       {...restProps}
-      type="radio"
-      checked={checked}
-      value={value}
+      checked={selected}
       onChange={handleChange}
+      type="radio"
+      value={value}
     />
   )
 }

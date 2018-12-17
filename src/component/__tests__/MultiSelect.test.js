@@ -1,7 +1,7 @@
 import { createElement } from "react"
 import TestRenderer from "react-test-renderer"
 
-import Select from "../Select"
+import MultiSelect from "../MultiSelect"
 import { FormProvider } from "../../context/form"
 
 const field = "a"
@@ -12,51 +12,54 @@ afterEach(() => {
   dispatch.mockClear()
 })
 
-describe("Select", () => {
+describe("MultiSelect", () => {
   it("renders correctly", () => {
     const state = getState()
     const tree = TestRenderer.create(
       <FormProvider value={[state, dispatch]}>
-        <Select field={field} />
+        <MultiSelect field={field} />
       </FormProvider>
     ).toJSON()
 
     expect(tree).toMatchSnapshot()
+    expect(tree.props.multiple).toBe(true)
   })
 
-  it("casts `undefined` value to empty string", () => {
+  it("casts `undefined` value to empty array", () => {
     const state = getState()
     const tree = TestRenderer.create(
       <FormProvider value={[state, dispatch]}>
-        <Select field={field} />
+        <MultiSelect field={field} />
       </FormProvider>
     ).toJSON()
 
-    expect(tree.props.value).toBe("")
+    expect(tree.props.value).toBeInstanceOf(Array)
+    expect(tree.props.value).toHaveLength(0)
   })
 
-  it("casts `null` value to empty string", () => {
+  it("casts `null` value to empty array", () => {
     const state = getState(null)
     const tree = TestRenderer.create(
       <FormProvider value={[state, dispatch]}>
-        <Select field={field} />
+        <MultiSelect field={field} />
       </FormProvider>
     ).toJSON()
 
-    expect(tree.props.value).toBe("")
+    expect(tree.props.value).toBeInstanceOf(Array)
+    expect(tree.props.value).toHaveLength(0)
   })
 
   it("dispatches on change", () => {
-    const state = getState("b")
-    const nextValue = "c"
+    const state = getState(new Set().add("b"))
+    const nextValue = new Set().add("b").add("c")
     const tree = TestRenderer.create(
       <FormProvider value={[state, dispatch]}>
-        <Select field={field} />
+        <MultiSelect field={field} />
       </FormProvider>
     ).toJSON()
 
     tree.props.onChange({
-      target: { value: nextValue },
+      target: { selectedOptions: Array.from(nextValue, value => ({ value })) },
     })
 
     expect(dispatch).toHaveBeenCalledTimes(1)
@@ -67,11 +70,11 @@ describe("Select", () => {
   })
 
   it("memoizes its change handler", () => {
-    const state = getState()
-    const nextValue = "b"
+    const state = getState(new Set())
+    const nextValue = new Set().add("b").add("c")
     const tree = TestRenderer.create(
       <FormProvider value={[state, dispatch]}>
-        <Select field={field} />
+        <MultiSelect field={field} />
       </FormProvider>
     )
 
@@ -80,7 +83,7 @@ describe("Select", () => {
 
     tree.update(
       <FormProvider value={[nextState, dispatch]}>
-        <Select field={field} />
+        <MultiSelect field={field} />
       </FormProvider>
     )
 

@@ -1,36 +1,27 @@
 import { createElement, useCallback } from "react"
 
-import { useFormContext } from "../context/form"
+import useSimpleSelection from "../selection/simple"
 
 const Checkbox = props => {
   const { field, value, ...restProps } = props
-  const { transformValue, value: selectedValues } = useFormContext(field)
-  const valueSet = selectedValues || new Set()
-  const checked = valueSet.has(value)
+  const { selectValue, selected } = useSimpleSelection(field, value)
 
   const handleChange = useCallback(
     event => {
       const { checked, value } = event.target
 
-      transformValue((valueSet = new Set()) => {
-        const nextValueSet = new Set(valueSet)
-
-        if (checked) nextValueSet.add(value)
-        else nextValueSet.delete(value)
-
-        return nextValueSet
-      })
+      selectValue(value, checked)
     },
-    [transformValue]
+    [selectValue]
   )
 
   return (
     <input
       {...restProps}
-      type="checkbox"
-      checked={checked}
-      value={value}
+      checked={selected}
       onChange={handleChange}
+      type="checkbox"
+      value={value}
     />
   )
 }
