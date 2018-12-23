@@ -11,6 +11,9 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
-    yarn
+    yarn install
+  displayName: 'Install dependencies'
+
+- script: |
     yarn build
-  displayName: 'yarn build'
+  displayName: 'Build with Rollup'
