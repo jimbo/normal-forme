@@ -1,69 +1,57 @@
-import { createElement, useContext } from "react"
+import { createElement } from "react"
 import TestRenderer from "react-test-renderer"
 
 import Scope from "../Scope"
-import Text from "../Text"
-import { FormProvider } from "../../context/form"
+import { ScopeConsumer } from "../../context/scope"
+import { join } from "../../util/deep"
 
 const field = "a"
 const nestedField = "b"
-const dispatch = jest.fn()
-const getState = value => ({ valueMap: new Map().set(field, value) })
-
-afterEach(() => {
-  dispatch.mockClear()
-})
 
 describe("Scope", () => {
   it("renders correctly", () => {
-    const state = getState()
     const tree = TestRenderer.create(
-      <FormProvider value={[state, dispatch]}>
-        <Scope field={field} />
-      </FormProvider>
+      <Scope field={field}>
+        <i />
+      </Scope>
     ).toJSON()
 
     expect(tree).toMatchSnapshot()
   })
 
-  it("provides a new form context", () => {
-    const state = getState(new Map().set("b", "c"))
-    const tree = TestRenderer.create(
-      <FormProvider value={[state, dispatch]}>
-        <Scope field={field}>
-          <Text field={nestedField} />
-        </Scope>
-      </FormProvider>
-    ).toJSON()
+  it("provides a scope context", () => {
+    let scopeValue
 
-    expect(tree.props.value).toBe("c")
+    TestRenderer.create(
+      <Scope field={field}>
+        <ScopeConsumer>
+          {contextValue => {
+            scopeValue = contextValue
+            return null
+          }}
+        </ScopeConsumer>
+      </Scope>
+    )
+
+    expect(scopeValue).toBe(field)
   })
 
-  it("dispatches if state value differs from context value", () => {
-    const state = getState(new Map().set("b", "c"))
-    const store = [state, dispatch]
-    const tree = TestRenderer.create(
-      <FormProvider value={store}>
-        <Scope field={field}>
-          <Text field={nestedField} />
+  it("supports nested scopes", () => {
+    let scopeValue
+
+    TestRenderer.create(
+      <Scope field={field}>
+        <Scope field={nestedField}>
+          <ScopeConsumer>
+            {contextValue => {
+              scopeValue = contextValue
+              return null
+            }}
+          </ScopeConsumer>
         </Scope>
-      </FormProvider>
+      </Scope>
     )
 
-    tree.toJSON().props.onChange({ target: { value: "d" } })
-
-    tree.update(
-      <FormProvider value={store}>
-        <Scope field={field}>
-          <Text field={nestedField} />
-        </Scope>
-      </FormProvider>
-    )
-
-    expect(dispatch).toHaveBeenCalledTimes(1)
-    expect(dispatch).toHaveBeenLastCalledWith({
-      type: "set value",
-      payload: { field: "a", nextValue: new Map().set("b", "d") },
-    })
+    expect(scopeValue).toBe(join(field, nestedField))
   })
 })

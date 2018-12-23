@@ -1,20 +1,14 @@
-import { createElement, useEffect } from "react"
+import { createElement, useContext } from "react"
 
-import { FormProvider, useFormContext } from "../context/form"
-import { useFormState } from "../state/form"
+import ScopeContext, { ScopeProvider } from "../context/scope"
+import { join } from "../util/deep"
 
 const Scope = props => {
   const { children, field } = props
-  const { setValue, value } = useFormContext(field)
-  const store = useFormState(value)
-  const { valueMap } = store[0]
-  const empty = !valueMap.size
+  const scope = useContext(ScopeContext)
+  const scopedField = join(scope, field)
 
-  useEffect(() => {
-    if (!empty && !Object.is(value, valueMap)) setValue(valueMap)
-  })
-
-  return <FormProvider value={store}>{children}</FormProvider>
+  return <ScopeProvider value={scopedField}>{children}</ScopeProvider>
 }
 
 export default Scope

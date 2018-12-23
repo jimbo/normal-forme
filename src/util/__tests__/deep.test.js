@@ -1,4 +1,4 @@
-import { getDeepValue, setDeepValue, setMapOrValue, split } from "../deep"
+import { getDeepValue, join, setDeepValue, setMapOrValue, split } from "../deep"
 
 describe("split", () => {
   it("returns an array", () => {
@@ -46,6 +46,34 @@ describe("split", () => {
 
     expect(parts).toHaveLength(3)
     expect(parts).toEqual(["a", "0", "b"])
+  })
+})
+
+describe("join", () => {
+  it("returns a string", () => {
+    expect(join()).toBe("")
+  })
+
+  it("joins parts with a dot", () => {
+    const parts = ["a", "b", "c"]
+
+    expect(join(...parts)).toBe("a.b.c")
+  })
+
+  it("joins parts with a dot", () => {
+    const parts = ["a", "b", "c"]
+
+    expect(join(...parts)).toBe("a.b.c")
+  })
+
+  it("omits leading and trailing dots", () => {
+    expect(join("a")).toBe("a")
+  })
+
+  it("omits empty parts", () => {
+    const parts = ["", "b", "c", "", "e"]
+
+    expect(join(...parts)).toBe("b.c.e")
   })
 })
 
