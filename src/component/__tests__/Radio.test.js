@@ -8,10 +8,6 @@ const field = "a"
 const dispatch = jest.fn()
 const getState = value => ({ valueMap: new Map().set(field, value) })
 
-afterEach(() => {
-  dispatch.mockClear()
-})
-
 describe("Radio", () => {
   it("renders correctly", () => {
     const state = getState("b")

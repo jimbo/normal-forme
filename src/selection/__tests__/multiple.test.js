@@ -9,11 +9,6 @@ const log = jest.fn()
 const dispatch = jest.fn()
 const getState = value => ({ valueMap: new Map().set(field, value) })
 
-afterEach(() => {
-  log.mockClear()
-  dispatch.mockClear()
-})
-
 describe("useMultipleSelection", () => {
   it("returns the selected values and a callback", () => {
     const value = new Set().add("b").add("c")

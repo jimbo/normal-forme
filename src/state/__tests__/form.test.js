@@ -9,10 +9,6 @@ const initialState = reducer()
 const toUpperCase = val => val.toUpperCase()
 const simpleValueMap = new Map().set("a", "b")
 
-afterEach(() => {
-  log.mockClear()
-})
-
 describe("useFormState", () => {
   it("returns a store", () => {
     const Component = () => {

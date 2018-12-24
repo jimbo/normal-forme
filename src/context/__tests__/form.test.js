@@ -1,15 +1,16 @@
 import { createElement } from "react"
 import TestRenderer from "react-test-renderer"
 
-import { FormProvider, useFormContext } from "../form"
+import FormContext, { FormProvider, useFormContext } from "../form"
 
 const log = jest.fn()
 const dispatch = jest.fn()
 const state = { valueMap: new Map().set("a", "b") }
 
-afterEach(() => {
-  log.mockClear()
-  dispatch.mockClear()
+describe("module", () => {
+  it("exports `FormContext` and `FormProvider`", () => {
+    expect(FormProvider).toBe(FormContext.Provider)
+  })
 })
 
 describe("useFormContext", () => {
