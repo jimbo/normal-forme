@@ -7,11 +7,6 @@ import { FormConsumer } from "../../context/form"
 const log = jest.fn()
 const preventDefault = jest.fn()
 
-afterEach(() => {
-  log.mockClear()
-  preventDefault.mockClear()
-})
-
 describe("Form", () => {
   it("renders correctly", () => {
     const tree = TestRenderer.create(<Form />).toJSON()

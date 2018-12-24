@@ -8,10 +8,6 @@ const field = "a"
 const dispatch = jest.fn()
 const getState = value => ({ valueMap: new Map().set(field, value) })
 
-afterEach(() => {
-  dispatch.mockClear()
-})
-
 describe("useSingleSelection", () => {
   it("returns the selected value and a callback", () => {
     let context

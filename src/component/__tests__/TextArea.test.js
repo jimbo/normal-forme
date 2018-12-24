@@ -8,10 +8,6 @@ const field = "a"
 const dispatch = jest.fn()
 const getState = (value = "b") => ({ valueMap: new Map().set(field, value) })
 
-afterEach(() => {
-  dispatch.mockClear()
-})
-
 describe("TextArea", () => {
   it("renders correctly", () => {
     const state = getState()
