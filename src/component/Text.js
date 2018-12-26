@@ -19,7 +19,7 @@ const Text = props => {
     [setValue]
   )
 
-  return <input {...restProps} value={stringValue} onChange={handleChange} />
+  return <input {...restProps} onChange={handleChange} value={stringValue} />
 }
 
 export default Text

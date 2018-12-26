@@ -14,7 +14,7 @@ const TextArea = props => {
     [setValue]
   )
 
-  return <textarea {...restProps} value={stringValue} onChange={handleChange} />
+  return <textarea {...restProps} onChange={handleChange} value={stringValue} />
 }
 
 export default TextArea
