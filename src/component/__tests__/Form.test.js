@@ -1,4 +1,4 @@
-import { createElement, useContext } from "react"
+import { createElement } from "react"
 import TestRenderer from "react-test-renderer"
 
 import Form, { useDefaultProps } from "../Form"
@@ -41,7 +41,7 @@ describe("Form", () => {
 
   it("doesn't prevent or call if `preventDefault` is `false`", () => {
     const tree = TestRenderer.create(
-      <Form preventDefault={false} onSubmit={log} />
+      <Form onSubmit={log} preventDefault={false} />
     ).toJSON()
 
     const result = tree.props.onSubmit({ preventDefault })

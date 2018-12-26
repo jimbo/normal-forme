@@ -10,10 +10,7 @@ const junitOptions = {
 
 const config = {
   clearMocks: true,
-  reporters: [
-    ["default", {}],
-    ["jest-junit", junitOptions]
-  ]
+  reporters: [["default", {}], ["jest-junit", junitOptions]],
 }
 
 module.exports = config

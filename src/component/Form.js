@@ -22,7 +22,7 @@ const Form = props => {
 
   const initialValueMap = createDeepMap(initialValues)
   const store = useFormState(initialValueMap)
-  const { valueMap } = store[0]
+  const [{ valueMap }] = store
 
   const handleSubmit = useCallback(
     event => {
