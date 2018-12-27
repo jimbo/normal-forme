@@ -10,7 +10,7 @@ steps:
     versionSpec: "8.x"
   displayName: "Install Node.js"
 
-- script: yarn install
+- script: yarn install --frozen-lockfile
   displayName: "Install dependencies"
 
 - script: yarn format:ci
