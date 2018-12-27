@@ -432,6 +432,7 @@ rules:
   - "ForInStatement"
   - "FunctionDeclaration[generator=false]"
   - "FunctionExpression[generator=false]"
+  - "ThisExpression"
   no-tabs:
   - 2
   no-ternary:
@@ -784,6 +785,12 @@ rules:
 
 # overrides
 overrides:
+- files:
+  - "*.config.js"
+  env:
+    browser: false
+    es6: true
+    node: true
 - files:
   - "*.test.js"
   env:
