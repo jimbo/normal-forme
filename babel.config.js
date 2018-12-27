@@ -10,7 +10,6 @@ const targets = {
 }
 
 const config = {
-  plugins,
   env: {
     development: {
       presets: [["@babel/preset-env", { targets: targets.dev }]],
@@ -22,6 +21,7 @@ const config = {
       presets: [["@babel/preset-env", { targets: targets.test }]],
     },
   },
+  plugins,
 }
 
 module.exports = config
