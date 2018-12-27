@@ -38,8 +38,8 @@ export const reducer = (state = initialState, action = {}) => {
 
 export const useFormState = (valueMap = initialValueMap) => {
   const initialAction = {
-    type: "initialize values",
     payload: { valueMap },
+    type: "initialize values",
   }
 
   return useReducer(reducer, initialState, initialAction)

@@ -87,8 +87,8 @@ describe("Checkbox", () => {
 
     expect(dispatch).toHaveBeenCalledTimes(1)
     expect(dispatch).toHaveBeenLastCalledWith({
-      type: "transform value",
       payload: { field, transformValue: expect.any(Function) },
+      type: "transform value",
     })
   })
 })

@@ -55,8 +55,8 @@ describe("Text", () => {
 
     expect(dispatch).toHaveBeenCalledTimes(1)
     expect(dispatch).toHaveBeenLastCalledWith({
-      type: "set value",
       payload: { field, nextValue },
+      type: "set value",
     })
   })
 

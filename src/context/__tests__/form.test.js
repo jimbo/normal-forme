@@ -60,8 +60,8 @@ describe("useFormContext's setValue", () => {
 
     expect(dispatch).toHaveBeenCalledTimes(1)
     expect(dispatch).toHaveBeenLastCalledWith({
-      type: "set value",
       payload: { field, nextValue },
+      type: "set value",
     })
   })
 })
@@ -88,8 +88,8 @@ describe("useFormContext's transformValue", () => {
 
     expect(dispatch).toHaveBeenCalledTimes(1)
     expect(dispatch).toHaveBeenLastCalledWith({
-      type: "transform value",
       payload: { field, transformValue: transform },
+      type: "transform value",
     })
   })
 })

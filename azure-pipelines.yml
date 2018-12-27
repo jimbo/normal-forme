@@ -13,11 +13,17 @@ steps:
 - script: yarn install
   displayName: "Install dependencies"
 
-- script: yarn build
-  displayName: "Build with Rollup"
+- script: yarn format:ci
+  displayName: "Format source with Prettier"
+
+- script: yarn lint
+  displayName: "Lint source with ESLint"
 
 - script: yarn test
   displayName: "Run tests with Jest"
+
+- script: yarn build
+  displayName: "Build with Rollup"
 
 - task: PublishTestResults@2
   inputs:

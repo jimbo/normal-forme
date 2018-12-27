@@ -58,8 +58,8 @@ describe("useMultipleSelection's selectValues", () => {
 
     expect(dispatch).toHaveBeenCalledTimes(1)
     expect(dispatch).toHaveBeenLastCalledWith({
-      type: "set value",
       payload: { field, nextValue },
+      type: "set value",
     })
   })
 })

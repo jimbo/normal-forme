@@ -19,8 +19,8 @@ export const useFormContext = field => {
   const setValue = useCallback(
     nextValue =>
       dispatch({
-        type: "set value",
         payload: { field: scopedField, nextValue },
+        type: "set value",
       }),
     [dispatch, scopedField]
   )
@@ -28,8 +28,8 @@ export const useFormContext = field => {
   const transformValue = useCallback(
     transformValue =>
       dispatch({
-        type: "transform value",
         payload: { field: scopedField, transformValue },
+        type: "transform value",
       }),
     [dispatch, scopedField]
   )
