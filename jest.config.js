@@ -5,12 +5,13 @@ const junitOptions = {
   outputName: "./junit.xml",
   suiteName: "Jest Tests",
   suiteNameTemplate: "{filename}",
-  titleTemplate: "{title}",
+  titleTemplate: "{classname} {title}",
 }
 
 const config = {
   clearMocks: true,
-  reporters: [["default", {}], ["jest-junit", junitOptions]],
+  coverageReporters: ["cobertura", "json", "text"],
+  reporters: ["default", ["jest-junit", junitOptions]],
 }
 
 module.exports = config
