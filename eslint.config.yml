@@ -490,7 +490,7 @@ rules:
   semi-style:
   - 0
   sort-keys:
-  - 0
+  - 2
   - "asc"
   - caseSensitive: true
     natural: true
