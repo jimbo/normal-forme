@@ -1,7 +1,7 @@
 const junitOptions = {
   ancestorSeparator: ": ",
   classNameTemplate: "{classname}",
-  outputDirectory: "dist",
+  outputDirectory: "coverage",
   outputName: "./junit.xml",
   suiteName: "Jest Tests",
   suiteNameTemplate: "{filename}",
