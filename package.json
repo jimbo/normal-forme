@@ -13,6 +13,7 @@
     "format": "prettier --write \"./**/*.js\"",
     "format:ci": "prettier --list-different \"./**/*.js\"",
     "lint": "eslint --config \"eslint.config.yml\" \".\"",
+    "prepublishOnly": "yarn build",
     "test": "jest --coverage",
     "test:dev": "jest --coverage --verbose"
   },
