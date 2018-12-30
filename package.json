@@ -3,19 +3,17 @@
   "version": "0.1.0",
   "license": "MIT",
   "description": "Elegant form components for React",
-  "author": "Jimmy Sanford <jimbo@users.noreply.github.com>",
+  "author": "Jimmy Sanford <jimmy.sanford.code@gmail.com>",
   "main": "dist/normal-forme.cjs.js",
   "module": "dist/normal-forme.esm.js",
   "sideEffects": false,
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "build": "rollup --config",
     "build:dev": "rollup --config --watch",
     "format": "prettier --write \"./**/*.js\"",
     "format:ci": "prettier --list-different \"./**/*.js\"",
     "lint": "eslint --config \"eslint.config.yml\" \".\"",
+    "prepublishOnly": "yarn build",
     "test": "jest --coverage",
     "test:dev": "jest --coverage --verbose"
   },
@@ -41,5 +39,18 @@
     "react-test-renderer": "16.7.0-alpha.2",
     "rollup": "^0.68.1",
     "rollup-plugin-babel": "^4.1.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jimbo/normal-forme.git"
+  },
+  "keywords": [
+    "react",
+    "hooks",
+    "form",
+    "context"
+  ],
+  "files": [
+    "dist"
+  ]
 }
