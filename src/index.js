@@ -4,6 +4,7 @@ export { default as MultiSelect } from "./component/MultiSelect"
 export { default as Radio } from "./component/Radio"
 export { default as Scope } from "./component/Scope"
 export { default as Select } from "./component/Select"
+export { default as Switch } from "./component/Switch"
 export { default as Text } from "./component/Text"
 export { default as TextArea } from "./component/TextArea"
 
