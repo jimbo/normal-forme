@@ -18,8 +18,8 @@
     "test:dev": "jest --coverage --verbose"
   },
   "peerDependencies": {
-    "react": "16.7.0-alpha.2",
-    "react-dom": "16.7.0-alpha.2"
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
@@ -35,9 +35,9 @@
     "jest": "^23.6.0",
     "jest-junit": "^5.2.0",
     "prettier": "^1.15.3",
-    "react": "16.7.0-alpha.2",
-    "react-dom": "16.7.0-alpha.2",
-    "react-test-renderer": "16.7.0-alpha.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-test-renderer": "^16.8.6",
     "rollup": "^0.68.1",
     "rollup-plugin-babel": "^4.1.0"
   },

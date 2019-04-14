@@ -1,11 +1,11 @@
 import { createElement } from "react"
 import renderer from "react-test-renderer"
 
-import { reducer, useFormState } from "../form"
+import { init, reducer, useFormState } from "../form"
 
 const log = jest.fn()
 const identity = val => val
-const initialState = reducer()
+const initialState = init()
 const toUpperCase = val => val.toUpperCase()
 const simpleValueMap = new Map().set("a", "b")
 
@@ -147,5 +147,36 @@ describe("reducer's `'transform value'` case", () => {
     const expected = new Map(simpleValueMap).set("a", "B")
 
     expect(valueMap).toEqual(expected)
+  })
+})
+
+describe("reducer's `'reset state'` case", () => {
+  it("returns a new state object", () => {
+    const initialState = { valueMap: simpleValueMap }
+    const type = "reset state"
+    const payload = initialState
+
+    const nextState = reducer(initialState, { payload, type })
+
+    expect(nextState).not.toBe(initialState)
+  })
+
+  it("sets `state.valueMap`", () => {
+    const initialState = { valueMap: simpleValueMap }
+    const type = "reset state"
+    const payload = initialState
+
+    const { valueMap } = reducer(initialState, { payload, type })
+
+    expect(valueMap).toBe(initialState.valueMap)
+  })
+})
+
+describe("reducer's default case", () => {
+  it("returns the current state object", () => {
+    const initialState = { valueMap: simpleValueMap }
+    const nextState = reducer(initialState)
+
+    expect(nextState).toBe(initialState)
   })
 })
