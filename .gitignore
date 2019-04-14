@@ -5,6 +5,9 @@
 # dependencies
 /node_modules
 
+# error logs
+yarn-error.log
+
 # lock files
 package-lock.json
 
