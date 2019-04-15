@@ -1,8 +1,8 @@
-import { createElement, useCallback } from "react"
+import { createElement, forwardRef, useCallback } from "react"
 
 import useSingleSelection from "../selection/single"
 
-const Select = props => {
+const Select = (props, ref) => {
   const { field, ...restProps } = props
   const { selectValue, selectedValue } = useSingleSelection(field)
   const value = selectedValue || ""
@@ -17,6 +17,7 @@ const Select = props => {
   return (
     <select
       {...restProps}
+      ref={ref}
       multiple={null}
       onChange={handleChange}
       value={value}
@@ -24,4 +25,4 @@ const Select = props => {
   )
 }
 
-export default Select
+export default forwardRef(Select)

@@ -1,4 +1,4 @@
-import { createElement, useCallback } from "react"
+import { createElement, forwardRef, useCallback } from "react"
 
 import { useFormContext } from "../context/form"
 import withDefaultProps from "../util/withDefaultProps"
@@ -7,7 +7,7 @@ const useDefaultProps = withDefaultProps({
   type: "text",
 })
 
-const Text = props => {
+const Text = (props, ref) => {
   const { field, ...restProps } = useDefaultProps(props)
   const { setValue, value } = useFormContext(field)
   const stringValue = value == null ? "" : `${value}`
@@ -19,7 +19,14 @@ const Text = props => {
     [setValue]
   )
 
-  return <input {...restProps} onChange={handleChange} value={stringValue} />
+  return (
+    <input
+      {...restProps}
+      ref={ref}
+      onChange={handleChange}
+      value={stringValue}
+    />
+  )
 }
 
-export default Text
+export default forwardRef(Text)

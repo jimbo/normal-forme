@@ -1,8 +1,8 @@
-import { createElement, useCallback } from "react"
+import { createElement, forwardRef, useCallback } from "react"
 
 import { useFormContext } from "../context/form"
 
-const Switch = props => {
+const Switch = (props, ref) => {
   const { field, ...restProps } = props
   const { setValue, value } = useFormContext(field)
   const checked = !!value
@@ -17,6 +17,7 @@ const Switch = props => {
   return (
     <input
       {...restProps}
+      ref={ref}
       checked={checked}
       onChange={handleChange}
       type="checkbox"
@@ -24,4 +25,4 @@ const Switch = props => {
   )
 }
 
-export default Switch
+export default forwardRef(Switch)
