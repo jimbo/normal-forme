@@ -1,4 +1,4 @@
-import { createElement, useCallback } from "react"
+import { createElement, forwardRef, useCallback } from "react"
 
 import { FormProvider } from "../context/form"
 import { useFormState } from "../state/form"
@@ -10,7 +10,7 @@ export const useDefaultProps = withDefaultProps({
   preventDefault: true,
 })
 
-const Form = props => {
+const Form = (props, ref) => {
   const allProps = useDefaultProps(props)
   const {
     children,
@@ -34,10 +34,10 @@ const Form = props => {
   )
 
   return (
-    <form {...restProps} onSubmit={handleSubmit}>
+    <form {...restProps} ref={ref} onSubmit={handleSubmit}>
       <FormProvider value={store}>{children}</FormProvider>
     </form>
   )
 }
 
-export default Form
+export default forwardRef(Form)

@@ -1,8 +1,8 @@
-import { createElement, useCallback } from "react"
+import { createElement, forwardRef, useCallback } from "react"
 
 import useSimpleSelection from "../selection/simple"
 
-const Checkbox = props => {
+const Checkbox = (props, ref) => {
   const { field, value, ...restProps } = props
   const { selectValue, selected } = useSimpleSelection(field, value)
 
@@ -18,6 +18,7 @@ const Checkbox = props => {
   return (
     <input
       {...restProps}
+      ref={ref}
       checked={selected}
       onChange={handleChange}
       type="checkbox"
@@ -26,4 +27,4 @@ const Checkbox = props => {
   )
 }
 
-export default Checkbox
+export default forwardRef(Checkbox)

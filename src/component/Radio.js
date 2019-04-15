@@ -1,8 +1,8 @@
-import { createElement, useCallback } from "react"
+import { createElement, forwardRef, useCallback } from "react"
 
 import useSingleSelection from "../selection/single"
 
-const Radio = props => {
+const Radio = (props, ref) => {
   const { field, value, ...restProps } = props
   const { selectValue, selected } = useSingleSelection(field, value)
 
@@ -16,6 +16,7 @@ const Radio = props => {
   return (
     <input
       {...restProps}
+      ref={ref}
       checked={selected}
       onChange={handleChange}
       type="radio"
@@ -24,4 +25,4 @@ const Radio = props => {
   )
 }
 
-export default Radio
+export default forwardRef(Radio)

@@ -1,8 +1,8 @@
-import { createElement, useCallback } from "react"
+import { createElement, forwardRef, useCallback } from "react"
 
 import { useFormContext } from "../context/form"
 
-const TextArea = props => {
+const TextArea = (props, ref) => {
   const { field, ...restProps } = props
   const { setValue, value } = useFormContext(field)
   const stringValue = value == null ? "" : `${value}`
@@ -14,7 +14,14 @@ const TextArea = props => {
     [setValue]
   )
 
-  return <textarea {...restProps} onChange={handleChange} value={stringValue} />
+  return (
+    <textarea
+      {...restProps}
+      ref={ref}
+      onChange={handleChange}
+      value={stringValue}
+    />
+  )
 }
 
-export default TextArea
+export default forwardRef(TextArea)
