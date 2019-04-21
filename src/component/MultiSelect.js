@@ -1,9 +1,10 @@
 import { createElement, forwardRef, useCallback } from "react"
 
 import useMultipleSelection from "../selection/multiple"
+import convertToString from "../util/convertToString"
 import { createSet } from "../util/structures"
 
-const pluckValue = ({ value }) => value
+const pluckValue = ({ value }) => convertToString(value)
 
 const MultiSelect = (props, ref) => {
   const { field, ...restProps } = props

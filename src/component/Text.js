@@ -1,6 +1,7 @@
 import { createElement, forwardRef, useCallback } from "react"
 
 import { useFormContext } from "../context/form"
+import convertToString from "../util/convertToString"
 import withDefaultProps from "../util/withDefaultProps"
 
 const useDefaultProps = withDefaultProps({
@@ -10,7 +11,7 @@ const useDefaultProps = withDefaultProps({
 const Text = (props, ref) => {
   const { field, ...restProps } = useDefaultProps(props)
   const { setValue, value } = useFormContext(field)
-  const stringValue = value == null ? "" : `${value}`
+  const stringValue = convertToString(value)
 
   const handleChange = useCallback(
     event => {
