@@ -1,11 +1,12 @@
 import { createElement, forwardRef, useCallback } from "react"
 
 import { useFormContext } from "../context/form"
+import convertToString from "../util/convertToString"
 
 const TextArea = (props, ref) => {
   const { field, ...restProps } = props
   const { setValue, value } = useFormContext(field)
-  const stringValue = value == null ? "" : `${value}`
+  const stringValue = convertToString(value)
 
   const handleChange = useCallback(
     event => {
