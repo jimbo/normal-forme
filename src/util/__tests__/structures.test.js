@@ -1,4 +1,4 @@
-import { createDeepMap, createMap, createSet } from "../structures"
+import { createMap, createSet } from "../structures"
 
 const elements = ["a", "b"]
 const elementsIterable = {
@@ -69,53 +69,5 @@ describe("createSet", () => {
     expect(result).toBeInstanceOf(Set)
     expect(result.size).toBe(2)
     expect([...result]).toEqual(["a-0", "b-1"])
-  })
-})
-
-describe("createDeepMap", () => {
-  it("returns `value` if it's null or undefined", () => {
-    expect(createDeepMap()).toBeUndefined()
-    expect(createDeepMap(null)).toBe(null)
-  })
-
-  it("returns `value` if it's a scalar", () => {
-    const string = "a"
-    const number = 0
-
-    expect(createDeepMap(string)).toBe(string)
-    expect(createDeepMap(number)).toBe(number)
-  })
-
-  it("returns `value` if it's a map or a set", () => {
-    const map = new Map()
-    const set = new Set()
-
-    expect(createDeepMap(map)).toBe(map)
-    expect(createDeepMap(set)).toBe(set)
-  })
-
-  it("returns a map if `value` is an object", () => {
-    const result = createDeepMap(entries)
-
-    expect(result).toEqual(new Map().set("a", "b").set("c", "d"))
-  })
-
-  it("returns a set if `value` is an array", () => {
-    const result = createDeepMap(elements)
-
-    expect(result).toEqual(new Set().add("a").add("b"))
-  })
-
-  it("calls itself recursively", () => {
-    const tree = {
-      a: { b: "c" },
-      x: ["y", "z"],
-    }
-
-    expect(createDeepMap(tree)).toEqual(
-      new Map()
-        .set("a", new Map().set("b", "c"))
-        .set("x", new Set().add("y").add("z"))
-    )
   })
 })

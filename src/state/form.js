@@ -1,7 +1,5 @@
 import { useReducer } from "react"
 
-import { getDeepValue, setDeepValue } from "../util/deep"
-
 export const init = (valueMap = new Map()) => ({ valueMap })
 
 export const reducer = (state, action = {}) => {
@@ -11,16 +9,16 @@ export const reducer = (state, action = {}) => {
     case "set value": {
       const { valueMap } = state
       const { field, nextValue } = payload
-      const nextValueMap = setDeepValue(valueMap, field, nextValue)
+      const nextValueMap = new Map(valueMap).set(field, nextValue)
 
       return { valueMap: nextValueMap }
     }
     case "transform value": {
       const { valueMap } = state
       const { field, transformValue } = payload
-      const currentValue = getDeepValue(valueMap, field)
+      const currentValue = valueMap.get(field)
       const nextValue = transformValue(currentValue)
-      const nextValueMap = setDeepValue(valueMap, field, nextValue)
+      const nextValueMap = new Map(valueMap).set(field, nextValue)
 
       return { valueMap: nextValueMap }
     }
