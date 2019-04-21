@@ -1,7 +1,7 @@
 import { createElement, useContext } from "react"
 
 import ScopeContext, { ScopeProvider } from "../context/scope"
-import { join } from "../util/deep"
+import { join } from "../util/path"
 
 const Scope = props => {
   const { children, field } = props

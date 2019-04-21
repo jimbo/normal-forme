@@ -3,7 +3,7 @@ import TestRenderer from "react-test-renderer"
 
 import Scope from "../Scope"
 import { ScopeConsumer } from "../../context/scope"
-import { join } from "../../util/deep"
+import { join } from "../../util/path"
 
 const field = "a"
 const nestedField = "b"

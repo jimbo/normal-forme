@@ -1,4 +1,4 @@
-export const createMap = (object = {}, mapFn) => {
+export const createMap = (object = "", mapFn) => {
   const iterable = object[Symbol.iterator] ? object : Object.entries(object)
   const map = new Map()
   let index = 0
@@ -22,20 +22,3 @@ export const createSet = (iterable = "", mapFn) => {
 
   return set
 }
-
-export const createDeepMap = value => {
-  try {
-    const type = Reflect.getPrototypeOf(value).constructor
-
-    return type === Object
-      ? createMap(value, mapEntry)
-      : type === Array
-      ? createSet(value, mapElement)
-      : value
-  } catch (error) {
-    return value
-  }
-}
-
-const mapEntry = ([key, value]) => [key, createDeepMap(value)]
-const mapElement = value => createDeepMap(value)

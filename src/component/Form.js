@@ -2,7 +2,7 @@ import { createElement, forwardRef, useCallback } from "react"
 
 import { FormProvider } from "../context/form"
 import { useFormState } from "../state/form"
-import { createDeepMap } from "../util/structures"
+import { createMap } from "../util/structures"
 import withDefaultProps from "../util/withDefaultProps"
 
 export const useDefaultProps = withDefaultProps({
@@ -20,7 +20,7 @@ const Form = (props, ref) => {
     ...restProps
   } = allProps
 
-  const initialValueMap = createDeepMap(initialValues)
+  const initialValueMap = createMap(initialValues || "")
   const store = useFormState(initialValueMap)
   const [{ valueMap }] = store
 

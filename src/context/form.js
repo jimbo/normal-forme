@@ -1,7 +1,7 @@
 import { createContext, useCallback, useContext } from "react"
 
 import ScopeContext from "../context/scope"
-import { getDeepValue, join } from "../util/deep"
+import { join } from "../util/path"
 
 const FormContext = createContext()
 const { Consumer, Provider } = FormContext
@@ -13,8 +13,8 @@ export { Provider as FormProvider }
 export const useFormContext = field => {
   const scope = useContext(ScopeContext)
   const scopedField = join(scope, field)
-  const [state, dispatch] = useContext(FormContext)
-  const value = getDeepValue(state.valueMap, scopedField)
+  const [{ valueMap }, dispatch] = useContext(FormContext)
+  const value = valueMap.get(scopedField)
 
   const setValue = useCallback(
     nextValue =>
