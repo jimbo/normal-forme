@@ -1,8 +1,8 @@
 import { createElement } from "react"
-import TestRenderer from "react-test-renderer"
 
 import MultiSelect from "../MultiSelect"
 import { FormProvider } from "../../context/form"
+import createTestInstance from "../../util/createTestInstance"
 
 const field = "a"
 const dispatch = jest.fn()
@@ -11,7 +11,7 @@ const getState = value => ({ valueMap: new Map().set(field, value) })
 describe("MultiSelect", () => {
   it("renders correctly", () => {
     const state = getState()
-    const tree = TestRenderer.create(
+    const tree = createTestInstance(
       <FormProvider value={[state, dispatch]}>
         <MultiSelect field={field} />
       </FormProvider>
@@ -23,7 +23,7 @@ describe("MultiSelect", () => {
 
   it("casts `undefined` value to empty array", () => {
     const state = getState()
-    const tree = TestRenderer.create(
+    const tree = createTestInstance(
       <FormProvider value={[state, dispatch]}>
         <MultiSelect field={field} />
       </FormProvider>
@@ -35,7 +35,7 @@ describe("MultiSelect", () => {
 
   it("casts `null` value to empty array", () => {
     const state = getState(null)
-    const tree = TestRenderer.create(
+    const tree = createTestInstance(
       <FormProvider value={[state, dispatch]}>
         <MultiSelect field={field} />
       </FormProvider>
@@ -48,7 +48,7 @@ describe("MultiSelect", () => {
   it("dispatches on change", () => {
     const state = getState(new Set().add("b"))
     const nextValue = new Set().add("b").add("c")
-    const tree = TestRenderer.create(
+    const tree = createTestInstance(
       <FormProvider value={[state, dispatch]}>
         <MultiSelect field={field} />
       </FormProvider>
@@ -68,7 +68,7 @@ describe("MultiSelect", () => {
   it("memoizes its change handler", () => {
     const state = getState(new Set())
     const nextValue = new Set().add("b").add("c")
-    const tree = TestRenderer.create(
+    const tree = createTestInstance(
       <FormProvider value={[state, dispatch]}>
         <MultiSelect field={field} />
       </FormProvider>

@@ -1,8 +1,8 @@
 import { createElement } from "react"
-import TestRenderer from "react-test-renderer"
 
 import useSingleSelection from "../single"
 import { FormProvider } from "../../context/form"
+import createTestInstance from "../../util/createTestInstance"
 
 const field = "a"
 const dispatch = jest.fn()
@@ -19,7 +19,7 @@ describe("useSingleSelection", () => {
       return <i />
     }
 
-    TestRenderer.create(
+    createTestInstance(
       <FormProvider value={[state, dispatch]}>
         <Component />
       </FormProvider>
@@ -44,7 +44,7 @@ describe("useSingleSelection", () => {
       return <i />
     }
 
-    TestRenderer.create(
+    createTestInstance(
       <FormProvider value={[state, dispatch]}>
         <Component />
       </FormProvider>
@@ -63,7 +63,7 @@ describe("useSingleSelection", () => {
       return <i />
     }
 
-    TestRenderer.create(
+    createTestInstance(
       <FormProvider value={[state, dispatch]}>
         <Component />
       </FormProvider>
@@ -85,7 +85,7 @@ describe("useSingleSelection's selectValue", () => {
       return <i />
     }
 
-    TestRenderer.create(
+    createTestInstance(
       <FormProvider value={[state, dispatch]}>
         <Component />
       </FormProvider>

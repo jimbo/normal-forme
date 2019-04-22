@@ -1,7 +1,7 @@
 import { createElement } from "react"
-import TestRenderer from "react-test-renderer"
 
 import FormContext, { FormProvider, useFormContext } from "../form"
+import createTestInstance from "../../util/createTestInstance"
 
 const log = jest.fn()
 const dispatch = jest.fn()
@@ -21,7 +21,7 @@ describe("useFormContext", () => {
       return <i />
     }
 
-    TestRenderer.create(
+    createTestInstance(
       <FormProvider value={[state, dispatch]}>
         <Component />
       </FormProvider>
@@ -50,7 +50,7 @@ describe("useFormContext's setValue", () => {
       return <i />
     }
 
-    TestRenderer.create(
+    createTestInstance(
       <FormProvider value={[state, dispatch]}>
         <Component />
       </FormProvider>
@@ -78,7 +78,7 @@ describe("useFormContext's transformValue", () => {
       return <i />
     }
 
-    TestRenderer.create(
+    createTestInstance(
       <FormProvider value={[state, dispatch]}>
         <Component />
       </FormProvider>

@@ -1,8 +1,8 @@
 import { createElement } from "react"
-import TestRenderer from "react-test-renderer"
 
 import Scope from "../Scope"
 import { ScopeConsumer } from "../../context/scope"
+import createTestInstance from "../../util/createTestInstance"
 import { join } from "../../util/path"
 
 const field = "a"
@@ -10,7 +10,7 @@ const nestedField = "b"
 
 describe("Scope", () => {
   it("renders correctly", () => {
-    const tree = TestRenderer.create(
+    const tree = createTestInstance(
       <Scope field={field}>
         <i />
       </Scope>
@@ -22,7 +22,7 @@ describe("Scope", () => {
   it("provides a scope context", () => {
     let scopeValue
 
-    TestRenderer.create(
+    createTestInstance(
       <Scope field={field}>
         <ScopeConsumer>
           {contextValue => {
@@ -39,7 +39,7 @@ describe("Scope", () => {
   it("supports nested scopes", () => {
     let scopeValue
 
-    TestRenderer.create(
+    createTestInstance(
       <Scope field={field}>
         <Scope field={nestedField}>
           <ScopeConsumer>
