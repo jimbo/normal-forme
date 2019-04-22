@@ -21,7 +21,10 @@ describe("useFormState", () => {
 
     expect(log).toHaveBeenCalledTimes(1)
     expect(log).toHaveBeenLastCalledWith([
-      expect.objectContaining({ valueMap: expect.any(Map) }),
+      expect.objectContaining({
+        fieldMap: expect.any(Map),
+        valueMap: expect.any(Map),
+      }),
       expect.any(Function),
     ])
   })
@@ -29,7 +32,7 @@ describe("useFormState", () => {
   it("applies initial values if provided", () => {
     const initialValueMap = new Map().set("a", "b")
     const Component = () => {
-      const store = useFormState(initialValueMap)
+      const store = useFormState({ initialValueMap })
       log(store)
       return <i />
     }
@@ -38,7 +41,10 @@ describe("useFormState", () => {
 
     expect(log).toHaveBeenCalledTimes(1)
     expect(log).toHaveBeenLastCalledWith([
-      expect.objectContaining({ valueMap: initialValueMap }),
+      expect.objectContaining({
+        fieldMap: expect.any(Map),
+        valueMap: initialValueMap,
+      }),
       expect.any(Function),
     ])
   })
@@ -89,6 +95,18 @@ describe("reducer's `'set value'` case", () => {
     const expected = simpleValueMap
 
     expect(valueMap).toEqual(expected)
+  })
+
+  it("preserves the rest of state", () => {
+    const type = "set value"
+    const payload = {
+      field: "a",
+      nextValue: "b",
+    }
+
+    const { fieldMap } = reducer(initialState, { payload, type })
+
+    expect(fieldMap).toBe(initialState.fieldMap)
   })
 })
 
@@ -148,13 +166,26 @@ describe("reducer's `'transform value'` case", () => {
 
     expect(valueMap).toEqual(expected)
   })
+
+  it("preserves the rest of state", () => {
+    const initialState = { valueMap: simpleValueMap }
+    const type = "transform value"
+    const payload = {
+      field: "a",
+      transformValue: toUpperCase,
+    }
+
+    const { fieldMap } = reducer(initialState, { payload, type })
+
+    expect(fieldMap).toBe(initialState.fieldMap)
+  })
 })
 
 describe("reducer's `'reset state'` case", () => {
   it("returns a new state object", () => {
     const initialState = { valueMap: simpleValueMap }
+    const payload = { initialValueMap: simpleValueMap }
     const type = "reset state"
-    const payload = initialState
 
     const nextState = reducer(initialState, { payload, type })
 
@@ -163,8 +194,8 @@ describe("reducer's `'reset state'` case", () => {
 
   it("sets `state.valueMap`", () => {
     const initialState = { valueMap: simpleValueMap }
+    const payload = { initialValueMap: simpleValueMap }
     const type = "reset state"
-    const payload = initialState
 
     const { valueMap } = reducer(initialState, { payload, type })
 

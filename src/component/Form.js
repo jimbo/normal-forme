@@ -14,14 +14,16 @@ const Form = (props, ref) => {
   const allProps = useDefaultProps(props)
   const {
     children,
+    initialFields,
     initialValues,
     onSubmit,
     preventDefault,
     ...restProps
   } = allProps
 
+  const initialFieldMap = createMap(initialFields || "")
   const initialValueMap = createMap(initialValues || "")
-  const store = useFormState(initialValueMap)
+  const store = useFormState({ initialFieldMap, initialValueMap })
   const [{ valueMap }] = store
 
   const handleSubmit = useCallback(
