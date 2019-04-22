@@ -1,8 +1,8 @@
 import { createElement } from "react"
-import TestRenderer from "react-test-renderer"
 
 import Checkbox from "../Checkbox"
 import { FormProvider } from "../../context/form"
+import createTestInstance from "../../util/createTestInstance"
 
 const field = "a"
 const dispatch = jest.fn()
@@ -11,7 +11,7 @@ const getState = value => ({ valueMap: new Map().set(field, value) })
 describe("Checkbox", () => {
   it("renders correctly", () => {
     const state = getState(new Set().add("b"))
-    const tree = TestRenderer.create(
+    const tree = createTestInstance(
       <FormProvider value={[state, dispatch]}>
         <Checkbox field={field} value="b" />
         <Checkbox field={field} value="c" />
@@ -25,7 +25,7 @@ describe("Checkbox", () => {
   it("sets `checked` to `true` if the value matches", () => {
     const selectedValues = new Set().add("c").add("d")
     const state = getState(selectedValues)
-    const tree = TestRenderer.create(
+    const tree = createTestInstance(
       <FormProvider value={[state, dispatch]}>
         <Checkbox field={field} value="b" />
         <Checkbox field={field} value="c" />
@@ -41,7 +41,7 @@ describe("Checkbox", () => {
 
   it("renders if context value is `undefined`", () => {
     const state = getState()
-    const tree = TestRenderer.create(
+    const tree = createTestInstance(
       <FormProvider value={[state, dispatch]}>
         <Checkbox field={field} value="b" />
         <Checkbox field={field} value="c" />
@@ -56,7 +56,7 @@ describe("Checkbox", () => {
 
   it("renders if context value is `null`", () => {
     const state = getState(null)
-    const tree = TestRenderer.create(
+    const tree = createTestInstance(
       <FormProvider value={[state, dispatch]}>
         <Checkbox field={field} value="b" />
         <Checkbox field={field} value="c" />
@@ -72,7 +72,7 @@ describe("Checkbox", () => {
   it("dispatches on change", () => {
     const valueToAppend = "d"
     const state = getState(new Set().add("b"))
-    const tree = TestRenderer.create(
+    const tree = createTestInstance(
       <FormProvider value={[state, dispatch]}>
         <Checkbox field={field} value="b" />
         <Checkbox field={field} value="c" />
@@ -97,7 +97,7 @@ describe("Checkbox's transformValue", () => {
   it("includes a checked value in the value set", () => {
     const valueToAppend = "d"
     const state = getState(new Set().add("b"))
-    const tree = TestRenderer.create(
+    const tree = createTestInstance(
       <FormProvider value={[state, dispatch]}>
         <Checkbox field={field} value="b" />
         <Checkbox field={field} value="c" />
@@ -120,7 +120,7 @@ describe("Checkbox's transformValue", () => {
   it("removes an unchecked value from the value set", () => {
     const valueToRemove = "d"
     const state = getState(new Set().add("c").add("d"))
-    const tree = TestRenderer.create(
+    const tree = createTestInstance(
       <FormProvider value={[state, dispatch]}>
         <Checkbox field={field} value="b" />
         <Checkbox field={field} value="c" />
@@ -145,7 +145,7 @@ describe("Checkbox's transformValue", () => {
   it("creates a new value set if it's undefined", () => {
     const valueToAppend = "d"
     const state = getState()
-    const tree = TestRenderer.create(
+    const tree = createTestInstance(
       <FormProvider value={[state, dispatch]}>
         <Checkbox field={field} value="b" />
         <Checkbox field={field} value="c" />

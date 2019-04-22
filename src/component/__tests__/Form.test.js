@@ -1,22 +1,22 @@
 import { createElement } from "react"
-import TestRenderer from "react-test-renderer"
 
 import Form, { useDefaultProps } from "../Form"
 import { FormConsumer } from "../../context/form"
+import createTestInstance from "../../util/createTestInstance"
 
 const log = jest.fn()
 const preventDefault = jest.fn()
 
 describe("Form", () => {
   it("renders correctly", () => {
-    const tree = TestRenderer.create(<Form />).toJSON()
+    const tree = createTestInstance(<Form />).toJSON()
 
     expect(tree).toMatchSnapshot()
     expect(tree.props.onSubmit).toBeInstanceOf(Function)
   })
 
   it("provides a store", () => {
-    TestRenderer.create(
+    createTestInstance(
       <Form>
         <FormConsumer>{store => log(store) || null}</FormConsumer>
       </Form>
@@ -30,7 +30,7 @@ describe("Form", () => {
   })
 
   it("prevents default and calls `onSubmit` with state values", () => {
-    const tree = TestRenderer.create(<Form onSubmit={log} />).toJSON()
+    const tree = createTestInstance(<Form onSubmit={log} />).toJSON()
 
     tree.props.onSubmit({ preventDefault })
 
@@ -40,7 +40,7 @@ describe("Form", () => {
   })
 
   it("doesn't prevent or call if `preventDefault` is `false`", () => {
-    const tree = TestRenderer.create(
+    const tree = createTestInstance(
       <Form onSubmit={log} preventDefault={false} />
     ).toJSON()
 
@@ -52,7 +52,7 @@ describe("Form", () => {
   })
 
   it("memoizes its submit handler", () => {
-    const tree = TestRenderer.create(<Form onSubmit={log} />)
+    const tree = createTestInstance(<Form onSubmit={log} />)
     const { onSubmit: handlerA } = tree.toJSON().props
 
     tree.update(<Form onSubmit={log} />)

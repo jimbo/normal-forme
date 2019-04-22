@@ -1,8 +1,8 @@
 import { createElement } from "react"
-import TestRenderer from "react-test-renderer"
 
 import Select from "../Select"
 import { FormProvider } from "../../context/form"
+import createTestInstance from "../../util/createTestInstance"
 
 const field = "a"
 const dispatch = jest.fn()
@@ -11,7 +11,7 @@ const getState = value => ({ valueMap: new Map().set(field, value) })
 describe("Select", () => {
   it("renders correctly", () => {
     const state = getState()
-    const tree = TestRenderer.create(
+    const tree = createTestInstance(
       <FormProvider value={[state, dispatch]}>
         <Select field={field} />
       </FormProvider>
@@ -22,7 +22,7 @@ describe("Select", () => {
 
   it("casts `undefined` value to empty string", () => {
     const state = getState()
-    const tree = TestRenderer.create(
+    const tree = createTestInstance(
       <FormProvider value={[state, dispatch]}>
         <Select field={field} />
       </FormProvider>
@@ -33,7 +33,7 @@ describe("Select", () => {
 
   it("casts `null` value to empty string", () => {
     const state = getState(null)
-    const tree = TestRenderer.create(
+    const tree = createTestInstance(
       <FormProvider value={[state, dispatch]}>
         <Select field={field} />
       </FormProvider>
@@ -45,7 +45,7 @@ describe("Select", () => {
   it("dispatches on change", () => {
     const state = getState("b")
     const nextValue = "c"
-    const tree = TestRenderer.create(
+    const tree = createTestInstance(
       <FormProvider value={[state, dispatch]}>
         <Select field={field} />
       </FormProvider>
@@ -65,7 +65,7 @@ describe("Select", () => {
   it("memoizes its change handler", () => {
     const state = getState()
     const nextValue = "b"
-    const tree = TestRenderer.create(
+    const tree = createTestInstance(
       <FormProvider value={[state, dispatch]}>
         <Select field={field} />
       </FormProvider>

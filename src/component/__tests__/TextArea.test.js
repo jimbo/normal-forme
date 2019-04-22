@@ -1,8 +1,8 @@
 import { createElement } from "react"
-import TestRenderer from "react-test-renderer"
 
 import TextArea from "../TextArea"
 import { FormProvider } from "../../context/form"
+import createTestInstance from "../../util/createTestInstance"
 
 const field = "a"
 const dispatch = jest.fn()
@@ -11,7 +11,7 @@ const getState = (value = "b") => ({ valueMap: new Map().set(field, value) })
 describe("TextArea", () => {
   it("renders correctly", () => {
     const state = getState()
-    const tree = TestRenderer.create(
+    const tree = createTestInstance(
       <FormProvider value={[state, dispatch]}>
         <TextArea field={field} />
       </FormProvider>
@@ -22,7 +22,7 @@ describe("TextArea", () => {
 
   it("casts `undefined` value to empty string", () => {
     const state = { valueMap: new Map() }
-    const tree = TestRenderer.create(
+    const tree = createTestInstance(
       <FormProvider value={[state, dispatch]}>
         <TextArea field={field} />
       </FormProvider>
@@ -33,7 +33,7 @@ describe("TextArea", () => {
 
   it("casts `null` value to empty string", () => {
     const state = getState(null)
-    const tree = TestRenderer.create(
+    const tree = createTestInstance(
       <FormProvider value={[state, dispatch]}>
         <TextArea field={field} />
       </FormProvider>
@@ -45,7 +45,7 @@ describe("TextArea", () => {
   it("dispatches on change", () => {
     const state = getState()
     const nextValue = "c"
-    const tree = TestRenderer.create(
+    const tree = createTestInstance(
       <FormProvider value={[state, dispatch]}>
         <TextArea field={field} />
       </FormProvider>
@@ -63,7 +63,7 @@ describe("TextArea", () => {
   it("memoizes its change handler", () => {
     const state = getState()
     const nextValue = "c"
-    const tree = TestRenderer.create(
+    const tree = createTestInstance(
       <FormProvider value={[state, dispatch]}>
         <TextArea field={field} />
       </FormProvider>

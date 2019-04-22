@@ -1,8 +1,8 @@
 import { createElement } from "react"
-import TestRenderer from "react-test-renderer"
 
 import useMultipleSelection from "../multiple"
 import { FormProvider } from "../../context/form"
+import createTestInstance from "../../util/createTestInstance"
 
 const field = "a"
 const log = jest.fn()
@@ -20,7 +20,7 @@ describe("useMultipleSelection", () => {
       return <i />
     }
 
-    TestRenderer.create(
+    createTestInstance(
       <FormProvider value={[state, dispatch]}>
         <Component />
       </FormProvider>
@@ -48,7 +48,7 @@ describe("useMultipleSelection's selectValues", () => {
       return <i />
     }
 
-    TestRenderer.create(
+    createTestInstance(
       <FormProvider value={[state, dispatch]}>
         <Component />
       </FormProvider>
