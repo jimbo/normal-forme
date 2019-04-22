@@ -1,6 +1,12 @@
 import { useReducer } from "react"
 
-export const init = (valueMap = new Map()) => ({ valueMap })
+export const init = (initialState = {}) => {
+  const { initialFieldMap, initialValueMap } = initialState
+  const fieldMap = initialFieldMap || new Map()
+  const valueMap = initialValueMap || new Map()
+
+  return { fieldMap, valueMap }
+}
 
 export const reducer = (state, action = {}) => {
   const { payload, type } = action
@@ -11,7 +17,7 @@ export const reducer = (state, action = {}) => {
       const { field, nextValue } = payload
       const nextValueMap = new Map(valueMap).set(field, nextValue)
 
-      return { valueMap: nextValueMap }
+      return { ...state, valueMap: nextValueMap }
     }
     case "transform value": {
       const { valueMap } = state
@@ -20,12 +26,10 @@ export const reducer = (state, action = {}) => {
       const nextValue = transformValue(currentValue)
       const nextValueMap = new Map(valueMap).set(field, nextValue)
 
-      return { valueMap: nextValueMap }
+      return { ...state, valueMap: nextValueMap }
     }
     case "reset state": {
-      const { valueMap } = payload
-
-      return init(valueMap)
+      return init(payload)
     }
     default: {
       return state
@@ -33,4 +37,5 @@ export const reducer = (state, action = {}) => {
   }
 }
 
-export const useFormState = valueMap => useReducer(reducer, valueMap, init)
+export const useFormState = initialState =>
+  useReducer(reducer, initialState, init)
